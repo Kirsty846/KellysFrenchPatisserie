@@ -24,3 +24,6 @@ C:\Users\kirst\MVCWebApp\KellysFrenchPatisserie\KellysPatisserie\KellysPatisseri
 C:\Users\kirst\MVCWebApp\KellysFrenchPatisserie\KellysPatisserie\KellysPatisserie\obj\Debug\net6.0\KellysPatisserie.pdb
 C:\Users\kirst\MVCWebApp\KellysFrenchPatisserie\KellysPatisserie\KellysPatisserie\obj\Debug\net6.0\KellysPatisserie.genruntimeconfig.cache
 C:\Users\kirst\MVCWebApp\KellysFrenchPatisserie\KellysPatisserie\KellysPatisserie\obj\Debug\net6.0\ref\KellysPatisserie.dll
+C:\Users\kirst\MVCWebApp\KellysFrenchPatisserie\KellysPatisserie\KellysPatisserie\bin\Debug\net6.0\jsconfig.json
+C:\Users\kirst\MVCWebApp\KellysFrenchPatisserie\KellysPatisserie\KellysPatisserie\bin\Debug\net6.0\package-lock.json
+C:\Users\kirst\MVCWebApp\KellysFrenchPatisserie\KellysPatisserie\KellysPatisserie\bin\Debug\net6.0\package.json
