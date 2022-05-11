@@ -1,30 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PatisserieAPI.Interfaces;
-using PatisserieAPI.Model;
+﻿using PatisserieAPI.Interfaces;
 using PatisserieAPI.ViewModels;
 
 namespace PatisserieAPI.Services
 {
     public class ProductService : IProductService
     {
-        //private readonly PatisserieDbContext _context;
         private readonly IProductRepository _productRepository;
 
         public ProductService(
-            //PatisserieDbContext context
-            IProductRepository productRepository
-            )
+            IProductRepository productRepository)
         {
              _productRepository = productRepository;
-            //_context = context;
         }
-
         
         public async Task<List<ProductViewModel>> GetProducts()
         {
             try
             {
-                //var products = await _context.Products.ToListAsync();
                 var products = _productRepository.GetProducts();
 
                 var productsList = from product in products

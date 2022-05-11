@@ -3,7 +3,7 @@
         <div>
             <b-navbar type="dark" variant="dark">
                 <b-navbar-nav>
-                    <b-nav-item href="#">Kellys French Patisserie</b-nav-item>
+                    <b-nav-item href="#">Kelly's French Patisserie</b-nav-item>
 
                     <b-nav-item-dropdown text="Products" right>
                         <b-dropdown-item href="#">Cake</b-dropdown-item>
@@ -15,7 +15,9 @@
             </b-navbar>
         </div>
         <div id="app">
-            <Home/>
+            <div style="padding:25px">
+                <Home/>
+            </div>
         </div>
     </div>
 </template>
