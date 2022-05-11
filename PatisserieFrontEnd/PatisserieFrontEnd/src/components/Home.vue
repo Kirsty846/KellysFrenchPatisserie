@@ -6,7 +6,10 @@
 
         <p>Link data from SQL to Vue:</p>
         <p>{{data2}}</p>
-        <p>{{data2.description}}</p>
+
+        <p>Link data from SQL to Vue:</p>
+        <p>{{data3}}</p>
+        <p>{{data3.description}}</p>
     </div>
 </template>
 
@@ -42,8 +45,9 @@
             this.$http.get(apiUrl)
                 .then((event: any) => {
                     console.log(event.body)
-                    this.data2 = event.body[0];
-                    this.data3 = event.body[0];
+                    console.log(event.body.result)
+                    this.data2 = event.body.result;
+                    this.data3 = event.body.result[0];
                 }, (response) => {
                     this.data2 = 'error';
                 });

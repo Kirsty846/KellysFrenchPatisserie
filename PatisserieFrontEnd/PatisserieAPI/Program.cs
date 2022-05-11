@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using PatisserieAPI.Interfaces;
 using PatisserieAPI.Model;
+using PatisserieAPI.Repository;
+using PatisserieAPI.Services;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -9,6 +12,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<PatisserieDbContext>(x => x.UseSqlServer(connectionString));
 
 // Add services to the container.
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
