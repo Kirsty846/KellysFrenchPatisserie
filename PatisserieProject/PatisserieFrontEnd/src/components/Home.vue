@@ -1,15 +1,24 @@
 <template>
     <div class="home">
-        <h1>{{ msg }}</h1>
-        <p>Link data from API to Vue:</p>
-        <p>{{data1}}</p>
+        <h1>Kellys French Patisserie</h1>
+        <h2>Products</h2>
+        <b-table-simple>
+            <b-thead>
+                <b-tr>
+                    <b-th>Name</b-th>
+                    <b-th>Description</b-th>
+                    <b-th>Price</b-th>
+                </b-tr>
+            </b-thead>
+            <b-tbody>
+                <b-tr v-for="(product,i) in products" :key="i">
+                    <b-td>{{ product.name }}</b-td>
+                    <b-td>{{ product.description}}</b-td>
+                    <b-td>${{ product.price.toFixed(2)}}</b-td>
+                </b-tr>
+            </b-tbody>
+        </b-table-simple>
 
-        <p>Link data from SQL to Vue:</p>
-        <p>{{data2}}</p>
-
-        <p>Link data from SQL to Vue:</p>
-        <p>{{data3}}</p>
-        <p>{{data3.description}}</p>
     </div>
 </template>
 
@@ -21,7 +30,7 @@
     export default class Home extends Vue {
         @Prop() private msg!: string;
         data1: string = '';
-        data2: any = [];
+        products: any = [];
         data3: Product = new Product;
         apiPath: string = 'https://localhost:7203' //there is a better place for this
 
@@ -46,10 +55,10 @@
                 .then((event: any) => {
                     console.log(event.body)
                     console.log(event.body.result)
-                    this.data2 = event.body.result;
+                    this.products = event.body.result;
                     this.data3 = event.body.result[0];
                 }, (response) => {
-                    this.data2 = 'error';
+                    this.products = 'error';
                 });
         }
     }

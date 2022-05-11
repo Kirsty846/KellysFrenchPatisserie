@@ -1,6 +1,22 @@
 <template>
-    <div id="app">
-        <Home msg="Hello world!" />
+    <div>
+        <div>
+            <b-navbar type="dark" variant="dark">
+                <b-navbar-nav>
+                    <b-nav-item href="#">Kellys French Patisserie</b-nav-item>
+
+                    <b-nav-item-dropdown text="Products" right>
+                        <b-dropdown-item href="#">Cake</b-dropdown-item>
+                        <b-dropdown-item href="#">Cup Cakes</b-dropdown-item>
+                    </b-nav-item-dropdown>
+
+                    <b-nav-item>Contact Us</b-nav-item>
+                </b-navbar-nav>
+            </b-navbar>
+        </div>
+        <div id="app">
+            <Home/>
+        </div>
     </div>
 </template>
 
