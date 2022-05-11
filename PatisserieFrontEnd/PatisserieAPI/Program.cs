@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using PatisserieAPI.Model;
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<PatisserieDbContext>(x => x.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddCors(options =>

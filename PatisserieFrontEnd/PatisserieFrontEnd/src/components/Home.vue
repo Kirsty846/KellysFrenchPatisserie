@@ -6,23 +6,25 @@
 
         <p>Link data from SQL to Vue:</p>
         <p>{{data2}}</p>
+        <p>{{data2.description}}</p>
     </div>
 </template>
 
 <script lang="ts">
     import { Component, Prop, Vue } from 'vue-property-decorator';
+    import Product from '../dataModels/product';
 
     @Component
     export default class Home extends Vue {
         @Prop() private msg!: string;
         data1: string = '';
-        data2: string = '';
-        apiPath: string = 'https://localhost:7203'
+        data2: any = [];
+        data3: Product = new Product;
+        apiPath: string = 'https://localhost:7203' //there is a better place for this
 
         created() {
-            this.data1 = 'hello1';
-            this.data2 = 'hello2';
             this.getFromController();
+            this.getFromController2()
         }
 
         getFromController() {
@@ -32,6 +34,18 @@
                     this.data1 = event.body;
                 }, (response) => {
                     this.data1 = 'error';
+                });
+        }
+
+        getFromController2() {
+            var apiUrl = `${this.apiPath}/api/Products/GetSqlProduct/`;
+            this.$http.get(apiUrl)
+                .then((event: any) => {
+                    console.log(event.body)
+                    this.data2 = event.body[0];
+                    this.data3 = event.body[0];
+                }, (response) => {
+                    this.data2 = 'error';
                 });
         }
     }
