@@ -1,7 +1,11 @@
 <template>
     <div class="home">
         <h1>{{ msg }}</h1>
-        <p>Welcome to your new single-page application, built with <a href="https://vuejs.org" target="_blank">Vue.js</a> and <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.</p>
+        <p>Link data from API to Vue:</p>
+        <p>{{data1}}</p>
+
+        <p>Link data from SQL to Vue:</p>
+        <p>{{data2}}</p>
     </div>
 </template>
 
@@ -11,6 +15,25 @@
     @Component
     export default class Home extends Vue {
         @Prop() private msg!: string;
+        data1: string = '';
+        data2: string = '';
+        apiPath: string = 'https://localhost:7203'
+
+        created() {
+            this.data1 = 'hello1';
+            this.data2 = 'hello2';
+            this.getFromController();
+        }
+
+        getFromController() {
+            var apiUrl = `${this.apiPath}/api/Products/GetProduct/`;
+            this.$http.get(apiUrl)
+                .then((event: any) => {
+                    this.data1 = event.body;
+                }, (response) => {
+                    this.data1 = 'error';
+                });
+        }
     }
 </script>
 
