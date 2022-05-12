@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PatisserieAPI.Interfaces;
+using PatisserieAPI.ViewModels;
 
 namespace PatisserieAPI.Controllers
 {
@@ -18,11 +19,29 @@ namespace PatisserieAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetProduct")]
-        public async Task<ActionResult> GetProduct()
+        [Route("GetProducts")]
+        public async Task<ActionResult> GetProducts()
         {
-            var test = _productService.GetProducts();
-            return Json(test);
+            var products = _productService.GetProducts();
+            return Json(products);
+        }
+
+        [HttpPost]
+        [Route("AddProduct")]
+        public async Task<ActionResult> AddProduct(
+            [FromBody] ProductViewModel product)
+        {
+            var productId = _productService.AddProduct(product);
+            return Json(productId);
+        }
+
+        [HttpPut]
+        [Route("EditProduct/{id}")]
+        public async Task<ActionResult> EditProduct(
+            [FromBody] ProductViewModel product)
+        {
+            var productId = _productService.EditProduct(product);
+            return Json(productId);
         }
     }
 }

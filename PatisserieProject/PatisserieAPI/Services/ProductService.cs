@@ -1,4 +1,5 @@
 ﻿using PatisserieAPI.Interfaces;
+using PatisserieAPI.Model;
 using PatisserieAPI.ViewModels;
 
 namespace PatisserieAPI.Services
@@ -33,6 +34,54 @@ namespace PatisserieAPI.Services
             catch (Exception ex)
             {
                 return new List<ProductViewModel>();
+            }
+        }
+
+        public async Task<Guid> AddProduct(ProductViewModel product)
+        {
+            try
+            {
+                var productModel = new Products
+                                   {
+                                       Id = Guid.NewGuid(), 
+                                       Name = product.Name,
+                                       Description = product.Description,
+                                       Price = product.Price
+                                   };
+
+                await _productRepository.AddProduct(productModel);               
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                return new Guid();
+            }
+        }
+
+        public async Task<Guid> EditProduct(ProductViewModel product)
+        {
+            try
+            {
+                if(product.Id != Guid.Empty)
+                {
+                    return new Guid();
+                }
+                var productModel = new Products
+                {
+                    Id = product.Id.Value,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price
+                };
+
+                await _productRepository.UpdateProduct(productModel);
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                return new Guid();
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using PatisserieAPI.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PatisserieAPI.Interfaces;
 using PatisserieAPI.Model;
 
 namespace PatisserieAPI.Repository
@@ -16,5 +17,20 @@ namespace PatisserieAPI.Repository
             return _context.Set<Products>()
                 .Where(o => o.Price > 0.0);
         }
+
+        public async Task AddProduct(Products product)
+        {
+            _context.Set<Products>().Add(product);
+            await CommitChangesAsync();
+        }
+
+        public async Task UpdateProduct(Products product)
+        {
+            _context.Entry<Products>(product).State = EntityState.Modified;
+            await CommitChangesAsync();
+        }
+
+        public async Task<int> CommitChangesAsync()
+           => await _context.SaveChangesAsync();
     }
 }
