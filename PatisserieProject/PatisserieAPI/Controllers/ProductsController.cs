@@ -31,7 +31,7 @@ namespace PatisserieAPI.Controllers
         public async Task<ActionResult> AddProduct(
             [FromBody] ProductViewModel product)
         {
-            var productId = _productService.AddProduct(product);
+            var productId = await _productService.AddProduct(product);
             return Json(productId);
         }
 
@@ -40,7 +40,7 @@ namespace PatisserieAPI.Controllers
         public async Task<ActionResult> EditProduct(
             [FromBody] ProductViewModel product)
         {
-            var productId = _productService.EditProduct(product);
+            var productId = await _productService.EditProduct(product);
             return Json(productId);
         }
     }
