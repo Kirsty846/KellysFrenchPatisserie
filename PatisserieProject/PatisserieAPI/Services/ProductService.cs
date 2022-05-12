@@ -31,8 +31,9 @@ namespace PatisserieAPI.Services
 
                 return productsList.ToList();
             }
-            catch (Exception ex)
+            catch
             {
+                //TODO: log exception
                 return new List<ProductViewModel>();
             }
         }
@@ -55,6 +56,7 @@ namespace PatisserieAPI.Services
             }
             catch (Exception ex)
             {
+                //TODO: log exception
                 return new Guid();
             }
         }
@@ -63,7 +65,7 @@ namespace PatisserieAPI.Services
         {
             try
             {
-                if(product.Id != Guid.Empty)
+                if(product.Id == Guid.Empty)
                 {
                     return new Guid();
                 }
@@ -81,7 +83,23 @@ namespace PatisserieAPI.Services
             }
             catch (Exception ex)
             {
+                //TODO: log exception
                 return new Guid();
+            }
+        }
+
+        public async Task DeleteProduct(Guid id)
+        {
+            try
+            {
+                var productModel = await _productRepository.GetById(id);
+
+                await _productRepository.DeleteProduct(productModel);
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return;
             }
         }
     }

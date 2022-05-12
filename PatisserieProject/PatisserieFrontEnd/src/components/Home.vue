@@ -1,8 +1,5 @@
 <template>
     <div class="home">
-        <div v-if="showError" class="errorStyle">
-            {{errorMessage}}
-        </div>
         <h1>Kelly's French Patisserie</h1>
         <h2>Products</h2>
         <b-button @click="$bvModal.show('addEditProductModal')">Add New Product</b-button>
@@ -12,6 +9,7 @@
                     <b-th>Name</b-th>
                     <b-th>Description</b-th>
                     <b-th>Price</b-th>
+                    <b-th>Actions</b-th>
                 </b-tr>
             </b-thead>
             <b-tbody>
@@ -19,6 +17,10 @@
                     <b-td>{{ product.name }}</b-td>
                     <b-td>{{ product.description }}</b-td>
                     <b-td>${{ product.price.toFixed(2) }}</b-td>
+                    <b-td>
+                        <b-button @click="editProduct(product)">Edit</b-button>
+                        <b-button @click="$bvModal.show('deleteProductModal'),setProduct(product)">Delete</b-button>
+                    </b-td>
                 </b-tr>
             </b-tbody>
         </b-table-simple>
@@ -55,6 +57,27 @@
             <b-button @click="addNewProduct">Save</b-button>
             <b-button @click="$bvModal.hide('addEditProductModal')">Cancel</b-button>
         </b-modal>
+
+        <b-modal hide-footer id="deleteProductModal">
+            <template #modal-title>
+                Delete Product
+            </template>
+            <div class="d-block text-center">
+                <h3>Are you sure you want to delete this product?</h3>
+            </div>
+            <b-button @click="deleteProduct">Yes</b-button>
+            <b-button @click="$bvModal.hide('deleteProductModal')">Cancel</b-button>
+        </b-modal>
+
+        <b-modal hide-footer id="errorModal">
+            <template #modal-title>
+                Error
+            </template>
+            <div class="d-block text-center errorStyle">
+                {{errorMessage}}
+            </div>
+            <b-button @click="$bvModal.hide('errorModal')">OK</b-button>
+        </b-modal>
     </div>
 </template>
 
@@ -66,7 +89,6 @@
     export default class Home extends Vue {
         products: any = [];
         apiPath: string = 'https://localhost:7203' //there is a better place for this
-        showError: boolean = false;
         errorMessage: string = '';
         addEditProduct: Product = new Product();
         created() {
@@ -74,13 +96,11 @@
         }    
 
         getProducts() {
-            this.showError = false;
             var apiUrl = `${this.apiPath}/api/Products/GetProducts/`;
             this.$http.get(apiUrl)
                 .then((event: any) => {
                     this.products = event.body.result;
                 }, (response) => {
-                    this.showError = true;
                     this.errorMessage = 'Error loading products';
                 });
         }
@@ -88,16 +108,57 @@
         async addNewProduct() {
             const validationPassed = await this.$validator.validateAll();
             if (validationPassed) {
-                var apiUrl = `${this.apiPath}/api/Products/AddProduct/`;
-                this.$http.post(apiUrl, this.addEditProduct)
-                    .then((event: any) => {
-                        this.getProducts();
-                        this.$bvModal.hide('addEditProductModal');
-                    }, (response) => {
-                        this.showError = true;
-                        this.errorMessage = 'Error adding new product';
-                    });
+                if (!this.addEditProduct.id) {
+                    var apiUrl = `${this.apiPath}/api/Products/AddProduct/`;
+                    this.$http.post(apiUrl, this.addEditProduct)
+                        .then((event: any) => {
+                            this.getProducts();
+                            this.$bvModal.hide('addEditProductModal');
+                            this.addEditProduct = new Product;
+                        }, (response) => {
+                            this.showError('Error adding new product', 'addEditProductModal');
+                        });
+                }
+                else {
+                    var apiUrl = `${this.apiPath}/api/Products/EditProduct/`;
+                    this.$http.put(apiUrl, this.addEditProduct)
+                        .then((event: any) => {
+                            this.getProducts();
+                            this.$bvModal.hide('addEditProductModal');
+                            this.addEditProduct = new Product;
+                        }, (response) => {
+                            this.showError('Error editing product', 'addEditProductModal');
+                        });             
+                }
             }
+        }
+
+        editProduct(product: Product) {
+            this.addEditProduct = JSON.parse(JSON.stringify(product));
+            this.$bvModal.show('addEditProductModal')
+        }
+
+        setProduct(product: Product) {
+            this.addEditProduct = JSON.parse(JSON.stringify(product));
+        }
+
+        deleteProduct() {
+            var apiUrl = `${this.apiPath}/api/Products/DeleteProduct/${this.addEditProduct.id}`;
+            this.$http.delete(apiUrl)
+                .then((event: any) => {
+                    this.getProducts();
+                    this.$bvModal.hide('deleteProductModal');
+                    this.addEditProduct = new Product;
+                }, (response) => {
+                    this.showError('Error deleting product', 'deleteProductModal');
+                });
+        }
+
+        showError(errorMessage: string, closeModal: string) {
+            this.$bvModal.show('errorModal');
+            this.$bvModal.hide(closeModal);
+            this.errorMessage = errorMessage;
+            this.addEditProduct = new Product;
         }
 
     }

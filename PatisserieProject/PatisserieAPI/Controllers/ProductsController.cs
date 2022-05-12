@@ -36,12 +36,21 @@ namespace PatisserieAPI.Controllers
         }
 
         [HttpPut]
-        [Route("EditProduct/{id}")]
+        [Route("EditProduct")]
         public async Task<ActionResult> EditProduct(
             [FromBody] ProductViewModel product)
         {
             var productId = await _productService.EditProduct(product);
             return Json(productId);
+        }
+
+        [HttpDelete]
+        [Route("DeleteProduct/{id}")]
+        public async Task<ActionResult> DeleteProduct(
+            Guid id)
+        {
+            await _productService.DeleteProduct(id);
+            return Json("ok");
         }
     }
 }

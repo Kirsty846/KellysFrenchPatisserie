@@ -30,6 +30,18 @@ namespace PatisserieAPI.Repository
             await CommitChangesAsync();
         }
 
+        public async Task DeleteProduct(Products product)
+        {
+            _context.Remove(product);
+            await CommitChangesAsync();
+        }
+
+        public async Task<Products> GetById(Guid id)
+        {
+            return _context.Set<Products>()
+                .Where(o => o.Id == id).FirstOrDefault();
+        }
+
         public async Task<int> CommitChangesAsync()
            => await _context.SaveChangesAsync();
     }

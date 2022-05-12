@@ -7,5 +7,6 @@ namespace PatisserieAPI.Interfaces
         Task<List<ProductViewModel>> GetProducts();
         Task<Guid> AddProduct(ProductViewModel product);
         Task<Guid> EditProduct(ProductViewModel product);
+        Task DeleteProduct(Guid id);
     }
 }
