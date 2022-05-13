@@ -34,6 +34,11 @@
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="src\App.vue" />
+    <Content Include="src\assets\BakingOwners.jpeg" />
+    <Content Include="src\components\CatalogueTabs.vue" />
+    <Content Include="src\components\ContactUs.vue" />
+    <Content Include="src\components\Cart.vue" />
+    <Content Include="src\components\Catalogue.vue" />
     <Content Include="src\components\Home.vue" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
@@ -46,6 +51,7 @@
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
     <Folder Include="src\dataModels\" />
+    <Folder Include="src\utilities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\main.ts" />
@@ -59,6 +65,7 @@
     <TypeScriptCompile Include="src\dataModels\product.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\utilities\enum.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
