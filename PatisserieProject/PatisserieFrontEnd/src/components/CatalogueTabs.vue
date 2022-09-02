@@ -2,7 +2,7 @@
     <div class="home">
         <h1>Kelly's French Patisserie</h1>
         <h2>Products</h2>
-        <b-tabs type="dark" variant="dark">
+        <b-tabs>
             <b-tab v-for="tab in tabs"
                    :name="tab.title"
                    :key="tab.title"
@@ -19,13 +19,19 @@
 </template>
 
 <script lang="ts">
-    import { Component, Prop, Vue } from 'vue-property-decorator';
-    import Catalogue from './Catalogue.vue';
+    import { Component, Vue } from 'vue-property-decorator';
+    import CelebrationCake from './CelebrationCake.vue';
+    import Fudge from './Fudge.vue';
+    import MiniTart from './MiniTart.vue';
+    import Macaroon from './Macaroon.vue';
     import Enum from '../utilities/enum';
 
     @Component({
         components: {
-            Catalogue,
+            CelebrationCake,
+            Fudge,
+            MiniTart,
+            Macaroon,
         }
     })
     export default class CatalogueTabs extends Vue {
@@ -34,10 +40,10 @@
         constructor() {
             super();
             this.tabs = [
-                { title: Enum.productTypes.celebrationCakes, content: 'catalogue', productType: Enum.productTypes.celebrationCakes, key: 1 },
-                { title: Enum.productTypes.fudge, content: 'catalogue', productType: Enum.productTypes.fudge, key: 2 },
-                { title: Enum.productTypes.macaroons, content: 'catalogue', productType: Enum.productTypes.macaroons, key: 3 },
-                { title: Enum.productTypes.miniTart, content: 'catalogue', productType: Enum.productTypes.miniTart, key: 4 },
+                { title: Enum.productTypes.celebrationCakes, content: 'celebration-cake', productType: Enum.productTypes.celebrationCakes, key: 1 },
+                { title: Enum.productTypes.fudge, content: 'fudge', productType: Enum.productTypes.fudge, key: 2 },
+                { title: Enum.productTypes.macaroons, content: 'macaroon', productType: Enum.productTypes.macaroons, key: 3 },
+                { title: Enum.productTypes.miniTart, content: 'mini-tart', productType: Enum.productTypes.miniTart, key: 4 },
             ]
         }
     }

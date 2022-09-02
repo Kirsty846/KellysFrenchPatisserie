@@ -1,4 +1,5 @@
-﻿using PatisserieAPI.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PatisserieAPI.Interfaces;
 using PatisserieAPI.Model;
 using PatisserieAPI.ViewModels;
 
@@ -14,14 +15,14 @@ namespace PatisserieAPI.Services
              _productRepository = productRepository;
         }
         
-        public async Task<List<ProductViewModel>> GetProducts()
+        public async Task<List<CelebrationCakeViewModel>> GetCelebrationCakes()
         {
             try
             {
-                var products = _productRepository.GetProducts();
+                var products = await _productRepository.GetCelebrationCakes().ToListAsync();
 
                 var productsList = from product in products
-                                   select new ProductViewModel
+                                   select new CelebrationCakeViewModel
                                    {
                                        Id = product.Id,
                                        Name = product.Name,
@@ -34,15 +35,15 @@ namespace PatisserieAPI.Services
             catch
             {
                 //TODO: log exception
-                return new List<ProductViewModel>();
+                return new List<CelebrationCakeViewModel>();
             }
         }
 
-        public async Task<Guid> AddProduct(ProductViewModel product)
+        public async Task<Guid> AddCelebrationCake(CelebrationCakeViewModel product)
         {
             try
             {
-                var productModel = new Products
+                var productModel = new CelebrationCake
                                    {
                                        Id = Guid.NewGuid(), 
                                        Name = product.Name,
@@ -50,7 +51,7 @@ namespace PatisserieAPI.Services
                                        Price = product.Price
                                    };
 
-                await _productRepository.AddProduct(productModel);               
+                await _productRepository.AddCelebrationCake(productModel);               
 
                 return productModel.Id;
             }
@@ -61,7 +62,7 @@ namespace PatisserieAPI.Services
             }
         }
 
-        public async Task<Guid> EditProduct(ProductViewModel product)
+        public async Task<Guid> EditCelebrationCake(CelebrationCakeViewModel product)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace PatisserieAPI.Services
                 {
                     return new Guid();
                 }
-                var productModel = new Products
+                var productModel = new CelebrationCake
                 {
                     Id = product.Id.Value,
                     Name = product.Name,
@@ -77,7 +78,7 @@ namespace PatisserieAPI.Services
                     Price = product.Price
                 };
 
-                await _productRepository.UpdateProduct(productModel);
+                await _productRepository.UpdateCelebrationCake(productModel);
 
                 return productModel.Id;
             }
@@ -88,13 +89,13 @@ namespace PatisserieAPI.Services
             }
         }
 
-        public async Task DeleteProduct(Guid id)
+        public async Task DeleteCelebrationCake(Guid id)
         {
             try
             {
-                var productModel = await _productRepository.GetById(id);
+                var productModel = await _productRepository.GetCelebrationCakeById(id);
 
-                await _productRepository.DeleteProduct(productModel);
+                await _productRepository.DeleteCelebrationCake(productModel);
             }
             catch (Exception ex)
             {

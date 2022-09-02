@@ -18,39 +18,75 @@ namespace PatisserieAPI.Controllers
             _productService= productService;
         }
 
+        //[HttpGet]
+        //[Route("GetProducts")]
+        //public async Task<ActionResult> GetProducts()
+        //{
+        //    var products = _productService.GetProducts();
+        //    return Json(products);
+        //}
+
+        //[HttpPost]
+        //[Route("AddProduct")]
+        //public async Task<ActionResult> AddProduct(
+        //    [FromBody] ProductViewModel product)
+        //{
+        //    var productId = await _productService.AddProduct(product);
+        //    return Json(productId);
+        //}
+
+        //[HttpPut]
+        //[Route("EditProduct")]
+        //public async Task<ActionResult> EditProduct(
+        //    [FromBody] ProductViewModel product)
+        //{
+        //    var productId = await _productService.EditProduct(product);
+        //    return Json(productId);
+        //}
+
+        //[HttpDelete]
+        //[Route("DeleteProduct/{id}")]
+        //public async Task<ActionResult> DeleteProduct(
+        //    Guid id)
+        //{
+        //    await _productService.DeleteProduct(id);
+        //    return Json("ok");
+        //}
+
         [HttpGet]
-        [Route("GetProducts")]
-        public async Task<ActionResult> GetProducts()
+        [Route("GetCelebrationCakes")]
+        public async Task<ActionResult> GetCelebrationCakes()
         {
-            var products = _productService.GetProducts();
-            return Json(products);
+            var celebrationCakes = _productService.GetCelebrationCakes();
+            return Json(celebrationCakes);
         }
 
         [HttpPost]
-        [Route("AddProduct")]
-        public async Task<ActionResult> AddProduct(
-            [FromBody] ProductViewModel product)
+        [Route("AddCelebrationCake")]
+        public async Task<ActionResult> AddCelebrationCake(
+            [FromBody] CelebrationCakeViewModel product)
         {
-            var productId = await _productService.AddProduct(product);
-            return Json(productId);
+            var celebrationCakeId = await _productService.AddCelebrationCake(product);
+            return Json(celebrationCakeId);
         }
 
         [HttpPut]
-        [Route("EditProduct")]
-        public async Task<ActionResult> EditProduct(
-            [FromBody] ProductViewModel product)
+        [Route("EditCelebrationCake")]
+        public async Task<ActionResult> EditCelebrationCake(
+            [FromBody] CelebrationCakeViewModel product)
         {
-            var productId = await _productService.EditProduct(product);
-            return Json(productId);
+            var celebrationCakeId = await _productService.EditCelebrationCake(product);
+            return Json(celebrationCakeId);
         }
 
         [HttpDelete]
-        [Route("DeleteProduct/{id}")]
-        public async Task<ActionResult> DeleteProduct(
+        [Route("DeleteCelebrationCake/{id}")]
+        public async Task<ActionResult> DeleteCelebrationCake(
             Guid id)
         {
-            await _productService.DeleteProduct(id);
+            await _productService.DeleteCelebrationCake(id);
             return Json("ok");
         }
+
     }
 }

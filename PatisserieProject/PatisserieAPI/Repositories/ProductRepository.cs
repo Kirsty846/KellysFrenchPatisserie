@@ -12,34 +12,34 @@ namespace PatisserieAPI.Repository
             _context = patisserieDbContext;
         }
 
-        public IQueryable<Products> GetProducts()
+        public IQueryable<CelebrationCake> GetCelebrationCakes()
         {
-            return _context.Set<Products>()
+            return _context.Set<CelebrationCake>()
                 .Where(o => o.Price > 0.0);
         }
 
-        public async Task AddProduct(Products product)
+        public async Task AddCelebrationCake(CelebrationCake celebrationCake)
         {
-            _context.Set<Products>().Add(product);
+            _context.Set<CelebrationCake>().Add(celebrationCake);
             await CommitChangesAsync();
         }
 
-        public async Task UpdateProduct(Products product)
+        public async Task UpdateCelebrationCake(CelebrationCake celebrationCake)
         {
-            _context.Entry<Products>(product).State = EntityState.Modified;
+            _context.Entry<CelebrationCake>(celebrationCake).State = EntityState.Modified;
             await CommitChangesAsync();
         }
 
-        public async Task DeleteProduct(Products product)
+        public async Task DeleteCelebrationCake(CelebrationCake celebrationCake)
         {
-            _context.Remove(product);
+            _context.Remove(celebrationCake);
             await CommitChangesAsync();
         }
 
-        public async Task<Products> GetById(Guid id)
+        public async Task<CelebrationCake> GetCelebrationCakeById(Guid id)
         {
-            return _context.Set<Products>()
-                .Where(o => o.Id == id).FirstOrDefault();
+            return _context.Set<CelebrationCake>()
+                .FirstOrDefault(o => o.Id == id);
         }
 
         public async Task<int> CommitChangesAsync()
