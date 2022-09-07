@@ -14,6 +14,7 @@ builder.Services.AddDbContext<PatisserieDbContext>(x => x.UseSqlServer(connectio
 // Add services to the container.
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IFlavourRepository, FlavourRepository>();
 
 builder.Services.AddCors(options =>
 {

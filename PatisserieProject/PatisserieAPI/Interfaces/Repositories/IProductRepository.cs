@@ -4,11 +4,6 @@ namespace PatisserieAPI.Interfaces
 {
     public interface IProductRepository 
     {
-        //IQueryable<Product> GetProducts();
-        //Task AddProduct(Product product);
-        //Task UpdateProduct(Product product);
-        //Task DeleteProduct(Product product);
-
         IQueryable<CelebrationCake> GetCelebrationCakes();
         Task AddCelebrationCake(CelebrationCake product);
         Task UpdateCelebrationCake(CelebrationCake product);

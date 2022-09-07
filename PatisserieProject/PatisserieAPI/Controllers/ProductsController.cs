@@ -1,3 +1,4 @@
+using EnsureThat;
 using Microsoft.AspNetCore.Mvc;
 using PatisserieAPI.Interfaces;
 using PatisserieAPI.ViewModels;
@@ -18,43 +19,8 @@ namespace PatisserieAPI.Controllers
             _productService= productService;
         }
 
-        //[HttpGet]
-        //[Route("GetProducts")]
-        //public async Task<ActionResult> GetProducts()
-        //{
-        //    var products = _productService.GetProducts();
-        //    return Json(products);
-        //}
-
-        //[HttpPost]
-        //[Route("AddProduct")]
-        //public async Task<ActionResult> AddProduct(
-        //    [FromBody] ProductViewModel product)
-        //{
-        //    var productId = await _productService.AddProduct(product);
-        //    return Json(productId);
-        //}
-
-        //[HttpPut]
-        //[Route("EditProduct")]
-        //public async Task<ActionResult> EditProduct(
-        //    [FromBody] ProductViewModel product)
-        //{
-        //    var productId = await _productService.EditProduct(product);
-        //    return Json(productId);
-        //}
-
-        //[HttpDelete]
-        //[Route("DeleteProduct/{id}")]
-        //public async Task<ActionResult> DeleteProduct(
-        //    Guid id)
-        //{
-        //    await _productService.DeleteProduct(id);
-        //    return Json("ok");
-        //}
-
         [HttpGet]
-        [Route("GetCelebrationCakes")]
+        [Route("celebrationCakes")]
         public async Task<ActionResult> GetCelebrationCakes()
         {
             var celebrationCakes = _productService.GetCelebrationCakes();
@@ -62,30 +28,45 @@ namespace PatisserieAPI.Controllers
         }
 
         [HttpPost]
-        [Route("AddCelebrationCake")]
+        [Route("celebrationCake")]
         public async Task<ActionResult> AddCelebrationCake(
             [FromBody] CelebrationCakeViewModel product)
         {
+            EnsureArg.IsNotNull(product);
+
             var celebrationCakeId = await _productService.AddCelebrationCake(product);
             return Json(celebrationCakeId);
         }
 
         [HttpPut]
-        [Route("EditCelebrationCake")]
+        [Route("celebrationCake")]
         public async Task<ActionResult> EditCelebrationCake(
             [FromBody] CelebrationCakeViewModel product)
         {
+            EnsureArg.IsNotNull(product);
+
             var celebrationCakeId = await _productService.EditCelebrationCake(product);
             return Json(celebrationCakeId);
         }
 
         [HttpDelete]
-        [Route("DeleteCelebrationCake/{id}")]
+        [Route("celebrationCake/{id}")]
         public async Task<ActionResult> DeleteCelebrationCake(
             Guid id)
         {
+            EnsureArg.IsNotDefault(id);
+
             await _productService.DeleteCelebrationCake(id);
             return Json("ok");
+        }
+
+
+        [HttpGet]
+        [Route("flavours")]
+        public async Task<ActionResult> GetFlavours()
+        {
+            var flavours = _productService.GetFlavours();
+            return Json(flavours);
         }
 
     }

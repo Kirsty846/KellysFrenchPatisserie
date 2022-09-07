@@ -36,10 +36,13 @@
     <Content Include="src\App.vue" />
     <Content Include="src\assets\BakingOwners.jpeg" />
     <Content Include="src\components\CatalogueTabs.vue" />
+    <Content Include="src\components\CelebrationCake.vue" />
     <Content Include="src\components\ContactUs.vue" />
     <Content Include="src\components\Cart.vue" />
-    <Content Include="src\components\Catalogue.vue" />
+    <Content Include="src\components\Fudge.vue" />
     <Content Include="src\components\Home.vue" />
+    <Content Include="src\components\Macaroon.vue" />
+    <Content Include="src\components\MiniTart.vue" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -62,6 +65,11 @@
     <Content Include="babel.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\dataModels\celebrationCake.ts" />
+    <TypeScriptCompile Include="src\dataModels\flavour.ts" />
+    <TypeScriptCompile Include="src\dataModels\fudge.ts" />
+    <TypeScriptCompile Include="src\dataModels\macaroon.ts" />
+    <TypeScriptCompile Include="src\dataModels\miniTart.ts" />
     <TypeScriptCompile Include="src\dataModels\product.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

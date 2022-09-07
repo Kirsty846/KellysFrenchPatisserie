@@ -4,7 +4,7 @@
     {
         public int Tiers { get; set; }
         public string FlavourId { get; set; } = null!;
-        public FlavourViewModel Flavour { get; set; } = null!;
+        public FlavourViewModel? Flavour { get; set; }
         public string IcingFlavour { get; set; } = null!;
     }
 }

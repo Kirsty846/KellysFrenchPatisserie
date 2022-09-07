@@ -8,5 +8,7 @@ namespace PatisserieAPI.Interfaces
         Task<Guid> AddCelebrationCake(CelebrationCakeViewModel product);
         Task<Guid> EditCelebrationCake(CelebrationCakeViewModel product);
         Task DeleteCelebrationCake(Guid id);
+
+        Task<List<FlavourOptionViewModel>> GetFlavours();
     }
 }
