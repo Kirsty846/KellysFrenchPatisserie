@@ -125,6 +125,298 @@ namespace PatisserieAPI.Services
             }
         }
 
+        public async Task<List<FudgeViewModel>> GetFudges()
+        {
+            try
+            {
+                var products = _productRepository.GetFudges();
+
+                var productsList = from product in products
+                                   select new FudgeViewModel
+                                   {
+                                       Id = product.Id,
+                                       Name = product.Name,
+                                       Description = product.Description,
+                                       Price = product.Price,
+                                       Size = product.Size,
+                                       FlavourId = product.FlavourId,
+                                       Flavour = new FlavourViewModel
+                                       {
+                                           Name = product.Flavour.Name,
+                                           Id = product.Flavour.Id
+                                       }
+                                   };
+
+                return productsList.ToList();
+            }
+            catch
+            {
+                //TODO: log exception
+                return new List<FudgeViewModel>();
+            }
+        }
+
+        public async Task<Guid> AddFudge(FudgeViewModel product)
+        {
+            try
+            {
+                var productModel = new Fudge
+                {
+                    Id = Guid.NewGuid(),
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Size = product.Size,
+                    FlavourId = product.FlavourId
+                };
+
+                await _productRepository.AddFudge(productModel);
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return new Guid();
+            }
+        }
+
+        public async Task<Guid> EditFudge(FudgeViewModel product)
+        {
+            try
+            {
+                if (product.Id == Guid.Empty)
+                {
+                    return new Guid();
+                }
+                var productModel = new Fudge
+                {
+                    Id = product.Id.Value,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Size = product.Size,
+                    FlavourId = product.FlavourId
+                };
+
+                await _productRepository.UpdateFudge(productModel);
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return new Guid();
+            }
+        }
+
+        public async Task DeleteFudge(Guid id)
+        {
+            try
+            {
+                var productModel = await _productRepository.GetFudgeById(id);
+
+                await _productRepository.DeleteFudge(productModel);
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return;
+            }
+        }
+
+        public async Task<List<MacaroonViewModel>> GetMacaroons()
+        {
+            try
+            {
+                var products = _productRepository.GetMacaroons();
+
+                var productsList = from product in products
+                                   select new MacaroonViewModel
+                                   {
+                                       Id = product.Id,
+                                       Name = product.Name,
+                                       Description = product.Description,
+                                       Price = product.Price,
+                                       Size = product.Size,
+                                       FlavourId = product.FlavourId,
+                                       Flavour = new FlavourViewModel
+                                       {
+                                           Name = product.Flavour.Name,
+                                           Id = product.Flavour.Id
+                                       }
+                                   };
+
+                return productsList.ToList();
+            }
+            catch
+            {
+                //TODO: log exception
+                return new List<MacaroonViewModel>();
+            }
+        }
+
+        public async Task<Guid> AddMacaroon(MacaroonViewModel product)
+        {
+            try
+            {
+                var productModel = new Macaroon
+                {
+                    Id = Guid.NewGuid(),
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Size = product.Size,
+                    FlavourId = product.FlavourId
+                };
+
+                await _productRepository.AddMacaroon(productModel);
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return new Guid();
+            }
+        }
+
+        public async Task<Guid> EditMacaroon(MacaroonViewModel product)
+        {
+            try
+            {
+                if (product.Id == Guid.Empty)
+                {
+                    return new Guid();
+                }
+                var productModel = new Macaroon
+                {
+                    Id = product.Id.Value,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Size = product.Size,
+                    FlavourId = product.FlavourId
+                };
+
+                await _productRepository.UpdateMacaroon(productModel);
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return new Guid();
+            }
+        }
+
+        public async Task DeleteMacaroon(Guid id)
+        {
+            try
+            {
+                var productModel = await _productRepository.GetMacaroonById(id);
+
+                await _productRepository.DeleteMacaroon(productModel);
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return;
+            }
+        }
+
+        public async Task<List<MiniTartViewModel>> GetMiniTarts()
+        {
+            try
+            {
+                var products = _productRepository.GetMiniTarts();
+
+                var productsList = from product in products
+                                   select new MiniTartViewModel
+                                   {
+                                       Id = product.Id,
+                                       Name = product.Name,
+                                       Description = product.Description,
+                                       Price = product.Price,
+                                       Type = product.Type
+                                   };
+
+                return productsList.ToList();
+            }
+            catch
+            {
+                //TODO: log exception
+                return new List<MiniTartViewModel>();
+            }
+        }
+
+        public async Task<Guid> AddMiniTart(MiniTartViewModel product)
+        {
+            try
+            {
+                var productModel = new MiniTart
+                {
+                    Id = Guid.NewGuid(),
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Type = product.Type
+                };
+
+                await _productRepository.AddMiniTart(productModel);
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return new Guid();
+            }
+        }
+
+        public async Task<Guid> EditMiniTart(MiniTartViewModel product)
+        {
+            try
+            {
+                if (product.Id == Guid.Empty)
+                {
+                    return new Guid();
+                }
+                var productModel = new MiniTart
+                {
+                    Id = product.Id.Value,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Type = product.Type
+                };
+
+                await _productRepository.UpdateMiniTart(productModel);
+
+                return productModel.Id;
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return new Guid();
+            }
+        }
+
+        public async Task DeleteMiniTart(Guid id)
+        {
+            try
+            {
+                var productModel = await _productRepository.GetMiniTartById(id);
+
+                await _productRepository.DeleteMiniTart(productModel);
+            }
+            catch (Exception ex)
+            {
+                //TODO: log exception
+                return;
+            }
+        }
+
         public async Task<List<FlavourOptionViewModel>> GetFlavours()
         {
             try

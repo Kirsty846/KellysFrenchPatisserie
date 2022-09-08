@@ -34,7 +34,7 @@
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="src\App.vue" />
-    <Content Include="src\assets\BakingOwners.jpeg" />
+    <Content Include="src\assets\BakingCoverPageImage.jpg" />
     <Content Include="src\components\CatalogueTabs.vue" />
     <Content Include="src\components\CelebrationCake.vue" />
     <Content Include="src\components\ContactUs.vue" />
