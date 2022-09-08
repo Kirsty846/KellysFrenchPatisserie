@@ -43,6 +43,7 @@
     <Content Include="src\components\Home.vue" />
     <Content Include="src\components\Macaroon.vue" />
     <Content Include="src\components\MiniTart.vue" />
+    <Content Include="src\components\TwilioVerify\VerifyModal.vue" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -53,6 +54,7 @@
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
+    <Folder Include="src\components\TwilioVerify\" />
     <Folder Include="src\dataModels\" />
     <Folder Include="src\utilities\" />
   </ItemGroup>

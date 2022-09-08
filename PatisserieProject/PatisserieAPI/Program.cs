@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PatisserieAPI.Interfaces;
 using PatisserieAPI.Model;
+using PatisserieAPI.Options;
 using PatisserieAPI.Repository;
 using PatisserieAPI.Services;
 
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<PatisserieDbContext>(x => x.UseSqlServer(connectionString));
+
+builder.Services.Configure<TwilioOptions>(builder.Configuration.GetSection("TwilioAccount"));
 
 // Add services to the container.
 builder.Services.AddScoped<IProductService, ProductService>();

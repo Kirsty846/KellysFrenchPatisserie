@@ -5,16 +5,32 @@
         <div class="row">
             <img :src="require('@/assets/BakingCoverPageImage.jpg')" style="width:400px;" />
         </div>
+        <div>
+            <p>Twilio integration</p>
+            <b-button @click="openVerifyModal">
+                Verify your Phone Number
+            </b-button>
+        </div>
+        <verifyModal></verifyModal>
     </div>
 </template>
 
 <script lang="ts">
     import { Component, Prop, Vue } from 'vue-property-decorator';
-
-    @Component
+    import VerifyModal from 
+    @Component({
+            components: {
+                VerifyModal,
+            }
+        })
     export default class Home extends Vue {
         created() {
-        }    
+        }
+
+        public openVerifyModal() {
+
+
+        }
     }
 </script>
 
