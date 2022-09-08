@@ -1,71 +1,104 @@
 <template>
     <div class="home">
         <h1>{{productType}}</h1>
-        <b-button @click="$bvModal.show('addEditProductModal')">Add New {{productType}}</b-button>
+        <b-button @click="showAddMiniTart">Add New {{productType}}</b-button>
         <b-table-simple>
             <b-thead>
                 <b-tr>
                     <b-th>Name</b-th>
                     <b-th>Description</b-th>
                     <b-th>Price</b-th>
+                    <b-th>Type</b-th>
                     <b-th>Actions</b-th>
                 </b-tr>
             </b-thead>
             <b-tbody>
-                <b-tr v-for="(product,i) in products" :key="i">
-                    <b-td>{{ product.name }}</b-td>
-                    <b-td>{{ product.description }}</b-td>
-                    <b-td>${{ product.price.toFixed(2) }}</b-td>
+                <b-tr v-for="(miniTart,i) in miniTarts" :key="i">
+                    <b-td>{{ miniTart.name }}</b-td>
+                    <b-td>{{ miniTart.description }}</b-td>
+                    <b-td>${{ miniTart.price.toFixed(2) }}</b-td>
+                    <b-td>{{ miniTart.type }}</b-td>
                     <b-td>
-                        <b-button @click="editProduct(product)">Edit</b-button>
-                        <b-button @click="$bvModal.show('deleteProductModal'),setProduct(product)">Delete</b-button>
+                        <b-button @click="editMiniTart(miniTart)">Edit</b-button>
+                        <b-button @click="$bvModal.show('deleteMiniTartModal'),setMiniTart(miniTart)">Delete</b-button>
                     </b-td>
                 </b-tr>
             </b-tbody>
         </b-table-simple>
-        <b-modal hide-footer id="addEditProductModal">
+        <div v-if="miniTarts.length == 0">
+            No products
+        </div>
+        <b-modal hide-footer id="addEditMiniTartModal">
             <template #modal-title>
-                Add/Edit Product
+                Add/Edit MiniTart
             </template>
-            <div class="d-block text-center">
-                <label for="productName">Name</label>
-                <div>
-                    <input id="productName" type="text" name="productName"
-                           v-validate="'required|max:250'"
-                           v-model="addEditProduct.name"
-                           data-vv-as="Product Name" />
-                    <div class="errorStyle" v-show="errors.has('productName')">{{ errors.first('productName') }}</div>
-                </div>
-                <label for="productDescription">Description</label>
-                <div>
-                    <input id="productDescription" type="text" name="productDescription"
-                           v-validate="'required|max:250'"
-                           v-model="addEditProduct.description"
-                           data-vv-as="Product Description" />
-                    <div class="errorStyle" v-show="errors.has('productDescription')">{{ errors.first('productDescription') }}</div>
-                </div>
-                <label for="productPrice">Price</label>
-                <div>
-                    <input id="productPrice" type="number" name="productPrice"
-                           v-validate="'required'"
-                           v-model="addEditProduct.price"
-                           data-vv-as="Product Price" />
-                    <div class="errorStyle" v-show="errors.has('productPrice')">{{ errors.first('productPrice') }}</div>
-                </div>
+            <div class="d-block text-center row">
+                <b-row class="moreVerticalSpacing">
+                    <b-col>
+                        <label for="miniTartName">Name:</label>
+                    </b-col>
+                    <b-col cols="8">
+                        <b-form-input id="miniTartName" type="text" name="miniTartName"
+                                      v-validate="'required|max:250'"
+                                      v-model="addEditMiniTart.name"
+                                      data-vv-as="MiniTart Name">
+                        </b-form-input>
+                        <div class="errorStyle" v-show="errors.has('miniTartName')">{{ errors.first('miniTartName') }}</div>
+                    </b-col>
+                </b-row>
+                <b-row class="moreVerticalSpacing">
+                    <b-col>
+                        <label for="miniTartDescription">Description:</label>
+                    </b-col>
+                    <b-col cols="8">
+                        <b-form-input id="miniTartDescription" type="text" name="miniTartDescription"
+                                      v-validate="'required|max:250'"
+                                      v-model="addEditMiniTart.description"
+                                      data-vv-as="MiniTart Description">
+                        </b-form-input>
+                        <div class="errorStyle" v-show="errors.has('miniTartDescription')">{{ errors.first('miniTartDescription') }}</div>
+                    </b-col>
+                </b-row>
+                <b-row class="moreVerticalSpacing">
+                    <b-col>
+                        <label for="miniTartPrice">Price(&#163):</label>
+                    </b-col>
+                    <b-col cols="8">
+                        <b-form-input id="miniTartPrice" type="number" name="miniTartPrice"
+                                      v-validate="'required'"
+                                      v-model="addEditMiniTart.price"
+                                      data-vv-as="MiniTart Price">
+                        </b-form-input>
+                        <div class="errorStyle" v-show="errors.has('miniTartPrice')">{{ errors.first('miniTartPrice') }}</div>
+                    </b-col>
+                </b-row>
+                <b-row class="moreVerticalSpacing">
+                    <b-col>
+                        <label for="miniTartType">Type:</label>
+                    </b-col>
+                    <b-col cols="8">
+                        <b-form-input id="miniTartType" type="text" name="miniTartType"
+                                      v-validate="'required'"
+                                      v-model="addEditMiniTart.type"
+                                      data-vv-as="MiniTart Type">
+                        </b-form-input>
+                        <div class="errorStyle" v-show="errors.has('miniTartType')">{{ errors.first('miniTartType') }}</div>
+                    </b-col>
+                </b-row>               
             </div>
-            <b-button @click="addNewProduct">Save</b-button>
-            <b-button @click="$bvModal.hide('addEditProductModal')">Cancel</b-button>
+            <b-button @click="addNewMiniTart">Save</b-button>
+            <b-button @click="$bvModal.hide('addEditMiniTartModal')">Cancel</b-button>
         </b-modal>
 
-        <b-modal hide-footer id="deleteProductModal">
+        <b-modal hide-footer id="deleteMiniTartModal">
             <template #modal-title>
-                Delete Product
+                Delete MiniTart
             </template>
             <div class="d-block text-center">
-                <h3>Are you sure you want to delete this product?</h3>
+                <h3>Are you sure you want to delete this celebration cake?</h3>
             </div>
-            <b-button @click="deleteProduct">Yes</b-button>
-            <b-button @click="$bvModal.hide('deleteProductModal')">Cancel</b-button>
+            <b-button @click="deleteMiniTart">Yes</b-button>
+            <b-button @click="$bvModal.hide('deleteMiniTartModal')">Cancel</b-button>
         </b-modal>
 
         <b-modal hide-footer id="errorModal">
@@ -82,75 +115,78 @@
 
 <script lang="ts">
     import { Component, Prop, Vue } from 'vue-property-decorator';
-    import Product from '../dataModels/product';
+    import MiniTartModel from '../dataModels/miniTart';
+    import Multiselect from 'vue-multiselect'
 
-    @Component
-    export default class Catalogue extends Vue {
+    @Component({
+        components: { Multiselect }
+    })
+    export default class MiniTart extends Vue {
         @Prop({ required: true }) productType!: string;
-        products: any = [];
+        miniTarts: any = [];
         apiPath: string = 'https://localhost:7203' //there is a better place for this
         errorMessage: string = '';
-        addEditProduct: Product = new Product();
+        addEditMiniTart: MiniTartModel = new MiniTartModel();       
         created() {
-            this.getProducts();
-        }    
+            this.getMiniTarts();
+        }
 
-        getProducts() {
-            var apiUrl = `${this.apiPath}/api/Products/GetProducts/`;
+        getMiniTarts() {
+            var apiUrl = `${this.apiPath}/api/Products/miniTarts/`;
             this.$http.get(apiUrl)
                 .then((event: any) => {
-                    this.products = event.body.result;
+                    this.miniTarts = event.body.result;
                 }, (response) => {
                     this.errorMessage = 'Error loading products';
                 });
         }
 
-        async addNewProduct() {
+        async addNewMiniTart() {
             const validationPassed = await this.$validator.validateAll();
             if (validationPassed) {
-                if (!this.addEditProduct.id) {
-                    var apiUrl = `${this.apiPath}/api/Products/AddProduct/`;
-                    this.$http.post(apiUrl, this.addEditProduct)
+                if (!this.addEditMiniTart.id) {
+                    var apiUrl = `${this.apiPath}/api/Products/miniTart/`;
+                    this.$http.post(apiUrl, this.addEditMiniTart)
                         .then((event: any) => {
-                            this.getProducts();
-                            this.$bvModal.hide('addEditProductModal');
-                            this.addEditProduct = new Product;
+                            this.getMiniTarts();
+                            this.$bvModal.hide('addEditMiniTartModal');
+                            this.addEditMiniTart = new MiniTartModel;
                         }, (response) => {
-                            this.showError('Error adding new product', 'addEditProductModal');
+                            this.showError('Error adding new product', 'addEditMiniTartModal');
                         });
                 }
                 else {
-                    var apiUrl = `${this.apiPath}/api/Products/EditProduct/`;
-                    this.$http.put(apiUrl, this.addEditProduct)
+                    var apiUrl = `${this.apiPath}/api/Products/miniTart/`;
+                    this.$http.put(apiUrl, this.addEditMiniTart)
                         .then((event: any) => {
-                            this.getProducts();
-                            this.$bvModal.hide('addEditProductModal');
-                            this.addEditProduct = new Product;
+                            this.getMiniTarts();
+                            this.$bvModal.hide('addEditMiniTartModal');
+                            this.addEditMiniTart = new MiniTartModel;
                         }, (response) => {
-                            this.showError('Error editing product', 'addEditProductModal');
-                        });             
+                            this.showError('Error editing product', 'addEditMiniTartModal');
+                        });
                 }
             }
         }
 
-        editProduct(product: Product) {
-            this.addEditProduct = JSON.parse(JSON.stringify(product));
-            this.$bvModal.show('addEditProductModal')
+        editMiniTart(miniTart: MiniTart) {
+            this.addEditMiniTart = JSON.parse(JSON.stringify(miniTart));
+            this.$bvModal.show('addEditMiniTartModal')
         }
 
-        setProduct(product: Product) {
-            this.addEditProduct = JSON.parse(JSON.stringify(product));
+        setMiniTart(miniTart: MiniTart) {
+            this.addEditMiniTart = JSON.parse(JSON.stringify(miniTart));
         }
 
-        deleteProduct() {
-            var apiUrl = `${this.apiPath}/api/Products/DeleteProduct/${this.addEditProduct.id}`;
+        deleteMiniTart() {
+            var apiUrl = `${this.apiPath}/api/Products/miniTart/${this.addEditMiniTart.id}`;
             this.$http.delete(apiUrl)
                 .then((event: any) => {
-                    this.getProducts();
-                    this.$bvModal.hide('deleteProductModal');
-                    this.addEditProduct = new Product;
+                    this.getMiniTarts();
+                    this.$bvModal.hide('deleteMiniTartModal');
+                    this.addEditMiniTart = new MiniTartModel;
                 }, (response) => {
-                    this.showError('Error deleting product', 'deleteProductModal');
+                    this.showError('Error deleting product', 'deleteMiniTartModal');
                 });
         }
 
@@ -158,15 +194,22 @@
             this.$bvModal.show('errorModal');
             this.$bvModal.hide(closeModal);
             this.errorMessage = errorMessage;
-            this.addEditProduct = new Product;
+            this.addEditMiniTart = new MiniTartModel;
         }
 
+        public showAddMiniTart() {
+            this.addEditMiniTart = new MiniTartModel();
+            this.$bvModal.show('addEditMiniTartModal');
+        }
     }
 </script>
 
 <style scoped>
-    .errorStyle{
+    .errorStyle {
         color: red;
     }
 
+    .moreVerticalSpacing {
+        padding: 5px 0px;
+    }
 </style>

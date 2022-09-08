@@ -60,6 +60,128 @@ namespace PatisserieAPI.Controllers
             return Json("ok");
         }
 
+        [HttpGet]
+        [Route("fudges")]
+        public async Task<ActionResult> GetFudges()
+        {
+            var fudges = _productService.GetFudges();
+            return Json(fudges);
+        }
+
+        [HttpPost]
+        [Route("fudge")]
+        public async Task<ActionResult> AddFudge(
+            [FromBody] FudgeViewModel product)
+        {
+            EnsureArg.IsNotNull(product);
+
+            var fudgeId = await _productService.AddFudge(product);
+            return Json(fudgeId);
+        }
+
+        [HttpPut]
+        [Route("fudge")]
+        public async Task<ActionResult> EditFudge(
+            [FromBody] FudgeViewModel product)
+        {
+            EnsureArg.IsNotNull(product);
+
+            var fudgeId = await _productService.EditFudge(product);
+            return Json(fudgeId);
+        }
+
+        [HttpDelete]
+        [Route("fudge/{id}")]
+        public async Task<ActionResult> DeleteFudge(
+            Guid id)
+        {
+            EnsureArg.IsNotDefault(id);
+
+            await _productService.DeleteFudge(id);
+            return Json("ok");
+        }
+
+        [HttpGet]
+        [Route("macaroons")]
+        public async Task<ActionResult> GetMacaroons()
+        {
+            var macaroons = _productService.GetMacaroons();
+            return Json(macaroons);
+        }
+
+        [HttpPost]
+        [Route("macaroon")]
+        public async Task<ActionResult> AddMacaroon(
+            [FromBody] MacaroonViewModel product)
+        {
+            EnsureArg.IsNotNull(product);
+
+            var macaroonId = await _productService.AddMacaroon(product);
+            return Json(macaroonId);
+        }
+
+        [HttpPut]
+        [Route("macaroon")]
+        public async Task<ActionResult> EditMacaroon(
+            [FromBody] MacaroonViewModel product)
+        {
+            EnsureArg.IsNotNull(product);
+
+            var macaroonId = await _productService.EditMacaroon(product);
+            return Json(macaroonId);
+        }
+
+        [HttpDelete]
+        [Route("macaroon/{id}")]
+        public async Task<ActionResult> DeleteMacaroon(
+            Guid id)
+        {
+            EnsureArg.IsNotDefault(id);
+
+            await _productService.DeleteMacaroon(id);
+            return Json("ok");
+        }
+
+        [HttpGet]
+        [Route("miniTarts")]
+        public async Task<ActionResult> GetMiniTarts()
+        {
+            var miniTarts = _productService.GetMiniTarts();
+            return Json(miniTarts);
+        }
+
+        [HttpPost]
+        [Route("miniTart")]
+        public async Task<ActionResult> AddMiniTart(
+            [FromBody] MiniTartViewModel product)
+        {
+            EnsureArg.IsNotNull(product);
+
+            var miniTartId = await _productService.AddMiniTart(product);
+            return Json(miniTartId);
+        }
+
+        [HttpPut]
+        [Route("miniTart")]
+        public async Task<ActionResult> EditMiniTart(
+            [FromBody] MiniTartViewModel product)
+        {
+            EnsureArg.IsNotNull(product);
+
+            var miniTartId = await _productService.EditMiniTart(product);
+            return Json(miniTartId);
+        }
+
+        [HttpDelete]
+        [Route("miniTart/{id}")]
+        public async Task<ActionResult> DeleteMiniTart(
+            Guid id)
+        {
+            EnsureArg.IsNotDefault(id);
+
+            await _productService.DeleteMiniTart(id);
+            return Json("ok");
+        }
 
         [HttpGet]
         [Route("flavours")]

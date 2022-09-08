@@ -3,9 +3,7 @@
         <h1>Kelly's French Patisserie</h1>
         <h2>Baking Owners: Kirsty and Kelly Jones</h2>
         <div class="row">
-            <img :src="require('@/assets/BakingOwners.jpeg')" style="width:400px;" />
-            <img :src="require('@/assets/BakingOwners.jpeg')" style="width:400px;" />
-            <img :src="require('@/assets/BakingOwners.jpeg')" style="width:400px;" />
+            <img :src="require('@/assets/BakingCoverPageImage.jpg')" style="width:400px;" />
         </div>
     </div>
 </template>

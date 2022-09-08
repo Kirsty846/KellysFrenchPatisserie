@@ -150,7 +150,6 @@
 <script lang="ts">
     import { Component, Prop, Vue } from 'vue-property-decorator';
     import CelebrationCakeModel from '../dataModels/celebrationCake';
-    import FlavourModel from '../dataModels/flavour';
     import Multiselect from 'vue-multiselect'
 
     @Component({
@@ -185,7 +184,6 @@
             const validationPassed = await this.$validator.validateAll();
             if (validationPassed) {
                 if (!this.addEditCelebrationCake.id) {
-                    console.log(this.addEditCelebrationCake)
                     var apiUrl = `${this.apiPath}/api/Products/celebrationCake/`;
                     this.$http.post(apiUrl, this.addEditCelebrationCake)
                         .then((event: any) => {
@@ -244,7 +242,7 @@
             this.$http.get(apiUrl)
                 .then((event: any) => {
                     this.flavourMultiSelect.options = event.body.result;
-                    this.populateFlavourSelectSelectedItem();
+                    this.populateFlavourSelectSelectedItem();                   
                 }, (response) => {
                     this.showError('Error getting flavours', 'addEditCelebrationCakeModal');
                 });
@@ -262,6 +260,7 @@
             else {
                 this.flavourMultiSelect.selectedItem = this.flavourMultiSelect.options[0].value;
             }
+            this.flavourMultiSelect_select(this.flavourMultiSelect.selectedItem);
         }
 
         public showAddCelebrationCake() {
