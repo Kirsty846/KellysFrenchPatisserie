@@ -14,7 +14,7 @@ namespace PatisserieAPI.Model
             string description,
             double price)
         {
-            EnsureArg.IsNotDefault(id);
+            SetId(id);
             SetName(name);
             SetDescription(description);
             SetPrice(price);
@@ -24,6 +24,12 @@ namespace PatisserieAPI.Model
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public double Price { get; set; }
+
+        private void SetId(Guid id)
+        {
+            EnsureArg.IsNotDefault(id);
+            Id = id;
+        }
 
         private void SetName(string name)
         {
