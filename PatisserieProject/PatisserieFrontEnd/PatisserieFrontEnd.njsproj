@@ -43,6 +43,7 @@
     <Content Include="src\components\Home.vue" />
     <Content Include="src\components\Macaroon.vue" />
     <Content Include="src\components\MiniTart.vue" />
+    <Content Include="src\components\TwilioVerify\VerifyModal.vue" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -53,7 +54,9 @@
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
+    <Folder Include="src\components\TwilioVerify\" />
     <Folder Include="src\dataModels\" />
+    <Folder Include="src\dataModels\TwilioVerify\" />
     <Folder Include="src\utilities\" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +76,8 @@
     <TypeScriptCompile Include="src\dataModels\product.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\dataModels\TwilioVerify\phoneNumberModel.ts" />
+    <TypeScriptCompile Include="src\dataModels\TwilioVerify\verificationModel.ts" />
     <TypeScriptCompile Include="src\utilities\enum.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
