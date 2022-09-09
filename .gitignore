@@ -4,3 +4,4 @@ obj/
 bin/
 dist/
 /.suo
+.vs
