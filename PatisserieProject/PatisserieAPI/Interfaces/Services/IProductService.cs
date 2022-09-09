@@ -19,11 +19,6 @@ namespace PatisserieAPI.Interfaces
         Task<Guid> EditMacaroon(MacaroonViewModel product);
         Task DeleteMacaroon(Guid id);
 
-        //Task<List<MiniTartViewModel>> GetMiniTarts();
-        //Task<Guid> AddMiniTart(MiniTartViewModel product);
-        //Task<Guid> EditMiniTart(MiniTartViewModel product);
-        //Task DeleteMiniTart(Guid id);
-
         Task<List<FlavourOptionViewModel>> GetFlavours();
     }
 }

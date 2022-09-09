@@ -33,12 +33,12 @@ namespace PatisserieAPI.Model
 
         private void SetName(string name)
         {
-            EnsureArg.IsNotNull(name);
+            EnsureArg.IsNotNullOrEmpty(name);
             Name = name;
         }
         private void SetDescription(string description)
         {
-            EnsureArg.IsNotNull(description);
+            EnsureArg.IsNotNullOrEmpty(description);
             Description = description;
         }
         private void SetPrice(double price)

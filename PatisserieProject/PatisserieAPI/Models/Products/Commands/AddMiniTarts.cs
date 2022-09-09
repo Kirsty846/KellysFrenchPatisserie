@@ -9,10 +9,10 @@ namespace PatisserieAPI.Models.Products.Commands
         public AddMiniTarts(MiniTartViewModel product)
         {
             EnsureArg.IsNotNull(product);
-            EnsureArg.IsNotNull(product.Name);
-            EnsureArg.IsNotNull(product.Description);
+            EnsureArg.IsNotNullOrEmpty(product.Name);
+            EnsureArg.IsNotNullOrEmpty(product.Description);
             EnsureArg.IsGt(product.Price, 0);
-            EnsureArg.IsNotNull(product.Type);
+            EnsureArg.IsNotNullOrEmpty(product.Type);
 
             Product = product;
                
