@@ -135,7 +135,7 @@
             var apiUrl = `${this.apiPath}/api/Products/miniTarts/`;
             this.$http.get(apiUrl)
                 .then((event: any) => {
-                    this.miniTarts = event.body.result;
+                    this.miniTarts = event.body;
                 }, (response) => {
                     this.errorMessage = 'Error loading products';
                 });

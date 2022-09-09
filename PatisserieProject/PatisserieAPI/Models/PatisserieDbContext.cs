@@ -13,10 +13,6 @@ namespace PatisserieAPI.Model
         }
 
         public DbSet<Product> Products { get; set; }
-        //public DbSet<CelebrationCake> CelebrationCake { get; set; }
-        //public DbSet<Fudge> Fudge { get; set; }
-        //public DbSet<Macaroon> Macaroon { get; set; }
-        //public DbSet<MiniTart> MiniTart { get; set; }
         public DbSet<Flavour> Flavour { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
