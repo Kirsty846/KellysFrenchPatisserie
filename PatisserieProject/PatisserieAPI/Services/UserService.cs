@@ -24,20 +24,54 @@ namespace PatisserieAPI.Services
         }
         
         
-        public async Task<string> SendVerificationCode(string phoneNumber)
+        public bool SendVerificationCode(PhoneNumberViewModel phoneNumber)
+        {
+            try
+            {
+                if (phoneNumber.PhoneNumber.StartsWith("0"))
+                {
+                    phoneNumber.PhoneNumber = "+44" + phoneNumber.PhoneNumber.Remove(0, 1);
+                }
+                else
+                {
+                    phoneNumber.PhoneNumber = "+44" + phoneNumber.PhoneNumber;
+                }
+                TwilioClient.Init(_twilioOptions.AccountSid, _twilioOptions.AuthenticationToken);
+                if (ValidatePhoneNumber(phoneNumber.PhoneNumber))
+                {
+                    var options = new CreateVerificationOptions(pathServiceSid: _twilioOptions.VerificationSid, to: phoneNumber.PhoneNumber, channel: CallOrSms(phoneNumber.PhoneNumber));
+                    VerificationResource.Create(options);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
+        }
+
+        public bool VerifyVerificationCode(VerifyViewModel verifyData)
         {
             TwilioClient.Init(_twilioOptions.AccountSid, _twilioOptions.AuthenticationToken);
-            var service = ServiceResource.Create(friendlyName: "Kelly's Patisserie");
-            if (ValidatePhoneNumber(phoneNumber))
+            var options = new CreateVerificationCheckOptions(pathServiceSid: _twilioOptions.VerificationSid);
+            options.Code = verifyData.VerificationCode;
+            if (verifyData.PhoneNumber.StartsWith("0"))
             {
-                var options = new CreateVerificationOptions(pathServiceSid: service.Sid, to: phoneNumber, channel: CallOrSms(phoneNumber));
-                VerificationResource.Create(options);
+                verifyData.PhoneNumber = "+44" + verifyData.PhoneNumber.Remove(0, 1);
             }
-            return service.Sid;
+            else
+            {
+                verifyData.PhoneNumber = "+44" + verifyData.PhoneNumber;
+            }
+            options.To = verifyData.PhoneNumber;
+            var verificationCheck = VerificationCheckResource.Create(options);
+            
+            return (verificationCheck == null || verificationCheck.Valid == null) ? false : (bool)(verificationCheck.Valid);
         }
 
         private bool ValidatePhoneNumber(string phoneNumber)
-        {
+        {         
             var options = new FetchPhoneNumberOptions(phoneNumber);
             var phoneNumberValidated = PhoneNumberResource.Fetch(options);
 

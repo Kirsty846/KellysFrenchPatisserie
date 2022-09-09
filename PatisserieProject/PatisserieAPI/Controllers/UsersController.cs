@@ -21,10 +21,19 @@ namespace PatisserieAPI.Controllers
 
         [HttpPost]
         [Route("sendVerificationCode")]
-        public async Task<ActionResult> SendVerificationCode(string phoneNumber)
+        public ActionResult SendVerificationCode(PhoneNumberViewModel phoneNumber)
         {
-            var twilioServiceId = await _userService.SendVerificationCode(phoneNumber);
-            return Json(twilioServiceId);
+            var successful = _userService.SendVerificationCode(phoneNumber);
+            return Json(successful);
         }
+
+        [HttpPost]
+        [Route("verifyVerificationCode")]
+        public ActionResult VerifyVerificationCode(VerifyViewModel verifyData)
+        {
+            var successful = _userService.VerifyVerificationCode(verifyData);
+            return Json(successful);
+        }
+
     }
 }

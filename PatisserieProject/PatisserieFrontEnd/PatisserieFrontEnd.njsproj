@@ -56,6 +56,7 @@
     <Folder Include="src\components\" />
     <Folder Include="src\components\TwilioVerify\" />
     <Folder Include="src\dataModels\" />
+    <Folder Include="src\dataModels\TwilioVerify\" />
     <Folder Include="src\utilities\" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +76,8 @@
     <TypeScriptCompile Include="src\dataModels\product.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\dataModels\TwilioVerify\phoneNumberModel.ts" />
+    <TypeScriptCompile Include="src\dataModels\TwilioVerify\verificationModel.ts" />
     <TypeScriptCompile Include="src\utilities\enum.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

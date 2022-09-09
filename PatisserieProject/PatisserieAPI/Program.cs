@@ -16,6 +16,7 @@ builder.Services.Configure<TwilioOptions>(builder.Configuration.GetSection("Twil
 
 // Add services to the container.
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IFlavourRepository, FlavourRepository>();
 

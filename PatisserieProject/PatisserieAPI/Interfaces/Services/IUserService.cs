@@ -4,7 +4,9 @@ namespace PatisserieAPI.Interfaces
 {
     public interface IUserService
     {
-        Task<string> SendVerificationCode(string phoneNumber);
+        bool SendVerificationCode(PhoneNumberViewModel phoneNumber);
+
+        bool VerifyVerificationCode(VerifyViewModel verifyData);
 
     }
 }

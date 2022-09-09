@@ -11,25 +11,26 @@
                 Verify your Phone Number
             </b-button>
         </div>
-        <verifyModal></verifyModal>
+        <verifyModal :showModal="showVerifyModal"></verifyModal>
     </div>
 </template>
 
 <script lang="ts">
-    import { Component, Prop, Vue } from 'vue-property-decorator';
-    import VerifyModal from 
+    import { Component, Vue } from 'vue-property-decorator';
+    import VerifyModal from './TwilioVerify/VerifyModal.vue';
+
     @Component({
             components: {
                 VerifyModal,
             }
         })
     export default class Home extends Vue {
+        showVerifyModal = false;
         created() {
         }
 
         public openVerifyModal() {
-
-
+            this.showVerifyModal = true;
         }
     }
 </script>
