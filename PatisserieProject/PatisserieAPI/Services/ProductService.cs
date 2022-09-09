@@ -325,97 +325,97 @@ namespace PatisserieAPI.Services
             }
         }
 
-        public async Task<List<MiniTartViewModel>> GetMiniTarts()
-        {
-            try
-            {
-                var products = _productRepository.GetMiniTarts();
+        //public async Task<List<MiniTartViewModel>> GetMiniTarts()
+        //{
+        //    try
+        //    {
+        //        var products = _productRepository.GetMiniTarts();
 
-                var productsList = from product in products
-                                   select new MiniTartViewModel
-                                   {
-                                       Id = product.Id,
-                                       Name = product.Name,
-                                       Description = product.Description,
-                                       Price = product.Price,
-                                       Type = product.Type
-                                   };
+        //        var productsList = from product in products
+        //                           select new MiniTartViewModel
+        //                           {
+        //                               Id = product.Id,
+        //                               Name = product.Name,
+        //                               Description = product.Description,
+        //                               Price = product.Price,
+        //                               Type = product.Type
+        //                           };
 
-                return productsList.ToList();
-            }
-            catch
-            {
-                //TODO: log exception
-                return new List<MiniTartViewModel>();
-            }
-        }
+        //        return productsList.ToList();
+        //    }
+        //    catch
+        //    {
+        //        //TODO: log exception
+        //        return new List<MiniTartViewModel>();
+        //    }
+        //}
 
-        public async Task<Guid> AddMiniTart(MiniTartViewModel product)
-        {
-            try
-            {
-                var productModel = new MiniTart
-                {
-                    Id = Guid.NewGuid(),
-                    Name = product.Name,
-                    Description = product.Description,
-                    Price = product.Price,
-                    Type = product.Type
-                };
+        //public async Task<Guid> AddMiniTart(MiniTartViewModel product)
+        //{
+        //    try
+        //    {
+        //        var productModel = new MiniTart
+        //        {
+        //            Id = Guid.NewGuid(),
+        //            Name = product.Name,
+        //            Description = product.Description,
+        //            Price = product.Price,
+        //            Type = product.Type
+        //        };
 
-                await _productRepository.AddMiniTart(productModel);
+        //        await _productRepository.AddMiniTart(productModel);
 
-                return productModel.Id;
-            }
-            catch (Exception ex)
-            {
-                //TODO: log exception
-                return new Guid();
-            }
-        }
+        //        return productModel.Id;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //TODO: log exception
+        //        return new Guid();
+        //    }
+        //}
 
-        public async Task<Guid> EditMiniTart(MiniTartViewModel product)
-        {
-            try
-            {
-                if (product.Id == Guid.Empty)
-                {
-                    return new Guid();
-                }
-                var productModel = new MiniTart
-                {
-                    Id = product.Id.Value,
-                    Name = product.Name,
-                    Description = product.Description,
-                    Price = product.Price,
-                    Type = product.Type
-                };
+        //public async Task<Guid> EditMiniTart(MiniTartViewModel product)
+        //{
+        //    try
+        //    {
+        //        if (product.Id == Guid.Empty)
+        //        {
+        //            return new Guid();
+        //        }
+        //        var productModel = new MiniTart
+        //        {
+        //            Id = product.Id.Value,
+        //            Name = product.Name,
+        //            Description = product.Description,
+        //            Price = product.Price,
+        //            Type = product.Type
+        //        };
 
-                await _productRepository.UpdateMiniTart(productModel);
+        //        await _productRepository.UpdateMiniTart(productModel);
 
-                return productModel.Id;
-            }
-            catch (Exception ex)
-            {
-                //TODO: log exception
-                return new Guid();
-            }
-        }
+        //        return productModel.Id;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //TODO: log exception
+        //        return new Guid();
+        //    }
+        //}
 
-        public async Task DeleteMiniTart(Guid id)
-        {
-            try
-            {
-                var productModel = await _productRepository.GetMiniTartById(id);
+        //public async Task DeleteMiniTart(Guid id)
+        //{
+        //    try
+        //    {
+        //        var productModel = await _productRepository.GetMiniTartById(id);
 
-                await _productRepository.DeleteMiniTart(productModel);
-            }
-            catch (Exception ex)
-            {
-                //TODO: log exception
-                return;
-            }
-        }
+        //        await _productRepository.DeleteMiniTart(productModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //TODO: log exception
+        //        return;
+        //    }
+        //}
 
         public async Task<List<FlavourOptionViewModel>> GetFlavours()
         {
