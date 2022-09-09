@@ -152,47 +152,6 @@ namespace PatisserieAPI.Controllers
             return Json("ok");
         }
 
-        //[HttpGet]
-        //[Route("miniTarts")]
-        //public async Task<ActionResult> GetMiniTarts()
-        //{
-        //    var miniTarts = _productService.GetMiniTarts();
-        //    return Json(miniTarts);
-        //}
-
-        //[HttpPost]
-        //[Route("miniTart")]
-        //public async Task<ActionResult> AddMiniTart(
-        //    [FromBody] MiniTartViewModel product)
-        //{
-        //    EnsureArg.IsNotNull(product);
-
-        //    var miniTartId = await _productService.AddMiniTart(product);
-        //    return Json(miniTartId);
-        //}
-
-        //[HttpPut]
-        //[Route("miniTart")]
-        //public async Task<ActionResult> EditMiniTart(
-        //    [FromBody] MiniTartViewModel product)
-        //{
-        //    EnsureArg.IsNotNull(product);
-
-        //    var miniTartId = await _productService.EditMiniTart(product);
-        //    return Json(miniTartId);
-        //}
-
-        //[HttpDelete]
-        //[Route("miniTart/{id}")]
-        //public async Task<ActionResult> DeleteMiniTart(
-        //    Guid id)
-        //{
-        //    EnsureArg.IsNotDefault(id);
-
-        //    await _productService.DeleteMiniTart(id);
-        //    return Json("ok");
-        //}
-
         [HttpGet]
         [Route("miniTarts")]
         public async Task<IList<MiniTartViewModel>> GetMiniTarts(
